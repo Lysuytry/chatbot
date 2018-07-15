@@ -15,10 +15,6 @@ app.use(logger('dev'));
 app.use(body.json());
 app.use(body.urlencoded({ extended: false }));
 
-app.use((req, res, next) => {
-  next();
-});
-
 app.get('/', (req, res) => {
   return res.json({'message': 'hello'});
 });
