@@ -19,6 +19,10 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/', (req, res) => {
+  return res.json({'message': 'hello'});
+});
+
 // Adds support for GET requests to our webhook
 app.get('/webhook', (req, res) => {
 
