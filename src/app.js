@@ -13,4 +13,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/webhook', (req, res) => {
+  return res.status(200).json({'hi' : 'hi'});
+});
+
 export default app;
