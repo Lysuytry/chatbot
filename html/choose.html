@@ -1,0 +1,61 @@
+<!DOCTYPE>
+<html>
+
+<head>
+  <title>Join Room</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+  <script>
+    $(function () {
+      var socket = io('http://localhost:3000/room');
+      //var room = $('#room').val();
+      $('form').submit(function () {
+        socket.emit('login', { username: $('#name').val(), room: $('#room').val() });
+        //socket.to(1).emit('chat', $('#m').val());
+        $('#m').val('');
+        return false;
+      });
+      socket.on('chat', function (msg) {
+        $('#messages').append($('<li>').text(msg));
+      });
+      socket.on('log', function (msg) {
+        $('#messages').append($('<li>').text(msg));
+      });
+    });
+  </script>
+</head>
+
+<body style="margin: 10%; padding: 10%">
+  <form action="">
+    <div class="row">
+      <div class="col-sm-2">
+        <label class="btn btn-primary">Username: </label>
+      </div>
+      <div class="col-sm-2">
+        <input type="text" id="name" />
+      </div>
+      <div class="col-sm-2">
+        <label class="btn btn-primary">Room: </label>
+      </div>
+      <div class="col-sm-2">
+        <input type="text" id="room" />
+      </div>
+    </div>
+    <button>Send</button>
+  </form>
+</body>
+
+</html>
